@@ -68,4 +68,3 @@ function attackEnemy() {
 collectTaxes();       // جمع دخل
 buyTanks(20);         // شراء 20 دبابة
 attackEnemy();        // إعلان الحرب uskhrrr
-hejje
