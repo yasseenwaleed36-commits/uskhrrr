@@ -1,0 +1,70 @@
+// ==========================================
+// 1. بيانات دولتك والدولة المنافسة
+// ==========================================
+let myCountry = {
+    name: "مصر",
+    money: 1000000,   // الميزانية بالدولار
+    soldiers: 5000,   // عدد الجنود
+    tanks: 50         // عدد الدبابات
+};
+
+let enemyCountry = {
+    name: "دولة منافسة",
+    money: 800000,
+    soldiers: 4000,
+    tanks: 40
+};
+
+// ==========================================
+// 2. وظائف إدارة الدولة والاقتصاد
+// ==========================================
+
+// جمع الضرائب (زيادة الميزانية)
+function collectTaxes() {
+    let income = 150000;
+    myCountry.money += income;
+    console.log(`تم جمع الضرائب! الميزانية الحالية: ${myCountry.money} $`);
+}
+
+// شراء دبابات للجيش
+function buyTanks(amount) {
+    let pricePerTank = 5000;
+    let totalPrice = amount * pricePerTank;
+
+    if (myCountry.money >= totalPrice) {
+        myCountry.money -= totalPrice;
+        myCountry.tanks += amount;
+        console.log(`تم شراء ${amount} دبابة بنجاح! الميزانية المتبقية: ${myCountry.money} $`);
+    } else {
+        console.log("الميزانية لا تكفي لشراء هذه الكمية!");
+    }
+}
+
+// ==========================================
+// 3. نظام المعارك والحرب
+// ==========================================
+function attackEnemy() {
+    // حساب القوة العسكرية (كل جندي = 1 قوة، كل دبابة = 10 قوة)
+    let myPower = (myCountry.soldiers * 1) + (myCountry.tanks * 10);
+    let enemyPower = (enemyCountry.soldiers * 1) + (enemyCountry.tanks * 10);
+
+    console.log(`--- بدء الحرب ضد ${enemyCountry.name} ---`);
+    console.log(`قوتك العسكرية: ${myPower} | قوة العدو: ${enemyPower}`);
+
+    if (myPower > enemyPower) {
+        let loot = 200000; // غنائم الحرب
+        myCountry.money += loot;
+        enemyCountry.soldiers = Math.floor(enemyCountry.soldiers * 0.5); // خفض جيش العدو
+        console.log(`🎉 انتصار ساحق! استوليت على ${loot} $ من خزينة العدو.`);
+    } else {
+        myCountry.soldiers = Math.floor(myCountry.soldiers * 0.5); // خسارة نصف الجيش
+        console.log(`💥 هزيمة! خسر جيشك نصف قواته في المعركة.`);
+    }
+}
+
+// ==========================================
+// 4. تجربة الكود (محاكاة أحداث)
+// ==========================================
+collectTaxes();       // جمع دخل
+buyTanks(20);         // شراء 20 دبابة
+attackEnemy();        // إعلان الحرب
